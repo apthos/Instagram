@@ -7,8 +7,14 @@
 //
 
 #import "FeedViewController.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
+#import "SceneDelegate.h"
+#import <Parse/Parse.h>
 
 @interface FeedViewController ()
+
+- (IBAction)onLogoutPress:(id)sender;
 
 @end
 
@@ -17,6 +23,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)onLogoutPress:(id)sender {
+    //logout
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+        else {
+            SceneDelegate *sceneDelegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            sceneDelegate.window.rootViewController = loginViewController;
+            
+        }
+    }];
+    
 }
 
 /*
@@ -28,5 +52,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

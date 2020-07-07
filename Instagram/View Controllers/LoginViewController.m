@@ -38,15 +38,27 @@
             
         }
         else {
-            NSLog(@"User registered successfully");
-            
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            
         }
     }];
     
 }
 
 - (void)loginUser {
+    NSString *username = self.usernameField.text;
+    NSString *password = self.passwordField.text;
+    
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError * error) {
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+            
+        }
+        else {
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            
+        }
+    }];
     
 }
 
@@ -62,6 +74,14 @@
 }
 
 - (IBAction)onLoginPress:(id)sender {
+    if ([self.usernameField.text isEqualToString:@""] || [self.passwordField.text isEqualToString:@""]) {
+        NSLog(@"Username or password missing.");
+    }
+    else {
+        [self loginUser];
+        
+    }
+    
 }
 
 /*
