@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "Post.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -70,11 +71,25 @@
 }
 
 - (IBAction)onCancelPress:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
 - (IBAction)onSharePress:(id)sender {
+    UIImage *resizedPhoto = [self resizeImage:self.photoView.image withSize:CGSizeMake(100.0, 100.0)];
     
+    [Post postUserImage:resizedPhoto withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError * error) {
+        if (succeeded) {
+            NSLog(@"Posted image!");
+            
+        }
+        else {
+            NSLog(@"Error: %@", error.localizedDescription);
+            
+        }
+    }];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
