@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxw-wx-IE3">
-                                <rect key="frame" x="81" y="412" width="252" height="72"/>
+                                <rect key="frame" x="81" y="417" width="252" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -24,8 +24,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Uxw-wx-IE3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OjZ-yX-Zdv"/>
-                            <constraint firstItem="Uxw-wx-IE3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="eh8-G2-vnd"/>
+                            <constraint firstItem="Uxw-wx-IE3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="7M3-B4-2IH"/>
+                            <constraint firstItem="Uxw-wx-IE3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="zOK-hO-juo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
