@@ -20,6 +20,8 @@
 		B837BB1E24B3DB0C001D0DF5 /* InstagramUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B837BB1D24B3DB0C001D0DF5 /* InstagramUITests.m */; };
 		B837BB2F24B3E339001D0DF5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B837BB2E24B3E339001D0DF5 /* LoginViewController.m */; };
 		B837BB3224B3F7D9001D0DF5 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B837BB3124B3F7D9001D0DF5 /* FeedViewController.m */; };
+		B837BB3F24B4EDA3001D0DF5 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = B837BB3E24B4EDA3001D0DF5 /* Post.m */; };
+		B837BB4224B51E86001D0DF5 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B837BB4124B51E86001D0DF5 /* ComposeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,10 @@
 		B837BB2E24B3E339001D0DF5 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B837BB3024B3F7D9001D0DF5 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		B837BB3124B3F7D9001D0DF5 /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		B837BB3D24B4EDA3001D0DF5 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		B837BB3E24B4EDA3001D0DF5 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		B837BB4024B51E86001D0DF5 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		B837BB4124B51E86001D0DF5 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		D1A5A2ABBD83C762995D67C1 /* Pods-InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FEA10F62A84C0072B5123C /* Pods-InstagramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.release.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6C874FDF9C0B7E56D7B9902 /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 		B837BAF524B3DB0B001D0DF5 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				B837BB3924B4EB9A001D0DF5 /* Models */,
 				B837BB2C24B3E316001D0DF5 /* View Controllers */,
 				B837BAF624B3DB0B001D0DF5 /* AppDelegate.h */,
 				B837BAF724B3DB0B001D0DF5 /* AppDelegate.m */,
@@ -186,8 +193,19 @@
 				B837BB2E24B3E339001D0DF5 /* LoginViewController.m */,
 				B837BB3024B3F7D9001D0DF5 /* FeedViewController.h */,
 				B837BB3124B3F7D9001D0DF5 /* FeedViewController.m */,
+				B837BB4024B51E86001D0DF5 /* ComposeViewController.h */,
+				B837BB4124B51E86001D0DF5 /* ComposeViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B837BB3924B4EB9A001D0DF5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B837BB3D24B4EDA3001D0DF5 /* Post.h */,
+				B837BB3E24B4EDA3001D0DF5 /* Post.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,8 +447,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B837BAF824B3DB0B001D0DF5 /* AppDelegate.m in Sources */,
+				B837BB3F24B4EDA3001D0DF5 /* Post.m in Sources */,
 				B837BB3224B3F7D9001D0DF5 /* FeedViewController.m in Sources */,
 				B837BB0924B3DB0B001D0DF5 /* main.m in Sources */,
+				B837BB4224B51E86001D0DF5 /* ComposeViewController.m in Sources */,
 				B837BAFB24B3DB0B001D0DF5 /* SceneDelegate.m in Sources */,
 				B837BB2F24B3E339001D0DF5 /* LoginViewController.m in Sources */,
 			);

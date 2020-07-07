@@ -8,7 +8,6 @@
 
 #import "FeedViewController.h"
 #import "LoginViewController.h"
-#import "AppDelegate.h"
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
 
