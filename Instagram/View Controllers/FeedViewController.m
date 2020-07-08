@@ -10,8 +10,13 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
+#import "PostCell.h"
+#import "Post.h"
 
-@interface FeedViewController ()
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSMutableArray *posts;
+@property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 
 - (IBAction)onLogoutPress:(id)sender;
 
@@ -22,6 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.feedTableView.delegate = self;
+    self.feedTableView.dataSource = self;
+    
+    [self fetchPosts];
+}
+
+- (void)fetchPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = (NSMutableArray *) posts;
+            [self.feedTableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 - (IBAction)onLogoutPress:(id)sender {
@@ -40,6 +66,19 @@
         }
     }];
     
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    
+    Post *post = self.posts[indexPath.row];
+    [cell setPost:post];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
 }
 
 /*

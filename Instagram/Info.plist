@@ -57,6 +57,16 @@
 	<string>Need library access to upload images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need camera access to take pictures</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>http://instagram-fbueng.herokuapp.com</key>
+			<string></string>
+		</dict>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
