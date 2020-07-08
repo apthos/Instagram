@@ -16,6 +16,7 @@
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *posts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 
 - (IBAction)onLogoutPress:(id)sender;
@@ -31,6 +32,16 @@
     self.feedTableView.delegate = self;
     self.feedTableView.dataSource = self;
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.feedTableView insertSubview:self.refreshControl atIndex:0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self fetchPosts];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self fetchPosts];
 }
 
@@ -44,6 +55,7 @@
         if (posts != nil) {
             self.posts = (NSMutableArray *) posts;
             [self.feedTableView reloadData];
+            [self.refreshControl endRefreshing];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
