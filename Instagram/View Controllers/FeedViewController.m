@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "PostCell.h"
 #import "Post.h"
+#import "DetailsViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -49,6 +50,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
+    [query includeKey:@"createdAt"];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -93,15 +95,19 @@
     return self.posts.count;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[PostCell class]]) {
+        PostCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.feedTableView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.post = post;
+    }
+    
 }
-*/
 
 
 @end
