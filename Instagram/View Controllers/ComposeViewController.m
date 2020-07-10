@@ -9,6 +9,8 @@
 #import "ComposeViewController.h"
 #import "Post.h"
 
+@import MBProgressHUD;
+
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -76,11 +78,14 @@
 }
 
 - (IBAction)onSharePress:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     UIImage *resizedPhoto = [self resizeImage:self.photoView.image withSize:CGSizeMake(100.0, 100.0)];
     
     [Post postUserImage:resizedPhoto withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError * error) {
         if (succeeded) {
-            NSLog(@"Posted image!");
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
             
         }
         else {
@@ -89,7 +94,6 @@
         }
     }];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

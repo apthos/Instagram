@@ -15,6 +15,8 @@
 #import "DetailsViewController.h"
 #import "InfiniteScrollActivityView.h"
 
+@import MBProgressHUD;
+
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *posts;
@@ -55,6 +57,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self fetchPosts];
 }
 
@@ -81,6 +84,9 @@
             
             if (!self.loadingMoreView.isHidden) {
                 [self.loadingMoreView endAnimating];
+            }
+            else {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
             }
         } else {
             NSLog(@"%@", error.localizedDescription);
