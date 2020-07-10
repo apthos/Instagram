@@ -13,11 +13,15 @@
 #import "PostCell.h"
 #import "Post.h"
 #import "DetailsViewController.h"
+#import "InfiniteScrollActivityView.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSNumber *pagesLoaded;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (strong, nonatomic) InfiniteScrollActivityView *loadingMoreView;
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 
 - (IBAction)onLogoutPress:(id)sender;
@@ -36,6 +40,18 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.feedTableView insertSubview:self.refreshControl atIndex:0];
+    
+    self.pagesLoaded = @(1);
+    
+    //Setup for infinite scrolling indicator
+    CGRect frame = CGRectMake(0, self.feedTableView.contentSize.height, self.feedTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.feedTableView addSubview:self.loadingMoreView];
+    
+    UIEdgeInsets insets = self.feedTableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.feedTableView.contentInset = insets;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,13 +67,21 @@
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
     [query includeKey:@"createdAt"];
-    query.limit = 20;
+    long limit = 5 * self.pagesLoaded.longValue;
+    query.limit = limit;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             self.posts = (NSMutableArray *) posts;
+            
+            self.isMoreDataLoading = NO;
+            
             [self.feedTableView reloadData];
             [self.refreshControl endRefreshing];
+            
+            if (!self.loadingMoreView.isHidden) {
+                [self.loadingMoreView endAnimating];
+            }
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -93,6 +117,25 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading) {
+        int scrollViewContentHeight = self.feedTableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.feedTableView.bounds.size.height;
+        
+        if (scrollView.contentOffset.y > scrollOffsetThreshold && self.feedTableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            self.pagesLoaded = [NSNumber numberWithLong:(self.pagesLoaded.longValue + 1)];
+            
+            CGRect frame = CGRectMake(0, self.feedTableView.contentSize.height, self.feedTableView.contentSize.width, InfiniteScrollActivityView.defaultHeight);
+            self.loadingMoreView.frame = frame;
+            [self.loadingMoreView startAnimating];
+            
+            [self fetchPosts];
+        }
+        
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
