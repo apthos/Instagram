@@ -75,7 +75,7 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
-        <!--Feed View Controller-->
+        <!--Home-->
         <scene sceneID="Pol-MI-oYG">
             <objects>
                 <viewController storyboardIdentifier="FeedViewController" id="WLp-Ob-ETa" customClass="FeedViewController" sceneMemberID="viewController">
@@ -179,7 +179,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hM8-CJ-9Lw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WrY-eK-Enc">
+                    <navigationItem key="navigationItem" title="Home" id="WrY-eK-Enc">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="mGe-hZ-OgZ">
                             <connections>
                                 <action selector="onLogoutPress:" destination="WLp-Ob-ETa" id="Ssh-xv-vdf"/>
