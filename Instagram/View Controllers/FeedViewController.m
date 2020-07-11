@@ -95,7 +95,6 @@
 }
 
 - (IBAction)onLogoutPress:(id)sender {
-    //logout
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);

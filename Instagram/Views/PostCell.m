@@ -30,7 +30,25 @@
     self.authorLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     self.likesLabel.text = [NSString stringWithFormat:@"%@ Likes", post.likeCount];
+    [self checkIfLiked];
     
+}
+
+- (void)checkIfLiked {
+    PFRelation *likes = self.post.likes;
+    PFQuery *query = [likes query];
+    [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object) {
+            self.liked = YES;
+            [self.likeButton setSelected:YES];
+        }
+        else {
+            self.liked = NO;
+            [self.likeButton setSelected:NO];
+        }
+        
+    }];
 }
 
 - (IBAction)onCommentPress:(id)sender {
@@ -38,7 +56,27 @@
 }
 
 - (IBAction)onLikePress:(id)sender {
-    
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (self.liked) {
+            self.liked = NO;
+            [self.post.likes removeObject:PFUser.currentUser];
+            self.post.likeCount = [NSNumber numberWithLong:(self.post.likeCount.longValue - 1)];
+        }
+        else {
+            self.liked = YES;
+            [self.post.likes addObject:PFUser.currentUser];
+            self.post.likeCount = [NSNumber numberWithLong:(self.post.likeCount.longValue + 1)];
+        }
+        
+        [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [self setPost:self.post];
+            }
+            else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+    }];
 }
 
 @end

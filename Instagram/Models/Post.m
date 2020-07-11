@@ -19,6 +19,7 @@
 @dynamic image;
 @dynamic likeCount;
 @dynamic commentCount;
+@dynamic likes;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";

@@ -117,6 +117,8 @@
                                                     <rect key="frame" x="15" y="379" width="21" height="23"/>
                                                     <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <state key="normal" image="heart" catalog="system"/>
+                                                    <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <state key="highlighted" image="heart.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="onLikePress:" destination="Icw-ek-iXr" eventType="touchUpInside" id="jB0-r7-lwc"/>
                                                     </connections>
@@ -385,6 +387,7 @@
     <resources>
         <image name="bubble.right" catalog="system" width="128" height="110"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
     </resources>
