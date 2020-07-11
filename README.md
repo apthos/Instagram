@@ -2,7 +2,8 @@
 
 **Instagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **11** hours spent in total
+Time spent: **11** hours spent on required features, **14** hours spent in total
+
 
 ## User Stories
 
@@ -22,15 +23,15 @@ The following **optional** features are implemented:
 - [ ] Style the login page to look like the real Instagram login page.
 - [ ] Style the feed to look like the real Instagram feed.
 - [ ] User can use a tab bar to switch between all "Instagram" posts and posts published only by the user. AKA, tabs for Home Feed and Profile
-- [ ] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
+- [X] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
 - [ ] Show the username and creation time for each post
-- [ ] After the user submits a new post, show a progress HUD while the post is being uploaded to Parse
+- [X] After the user submits a new post, show a progress HUD while the post is being uploaded to Parse
 - User Profiles:
   - [ ] Allow the logged in user to add a profile photo
   - [ ] Display the profile photo with each post
   - [ ] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
+- [X] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Implement a custom camera view.
 
 The following **additional** features are implemented:
@@ -63,6 +64,15 @@ Here's a walkthrough of implemented user stories:
 
 6. Details
 <img src='https://i.imgur.com/18jjxkS.gif' title='Details' width='' alt='Details' />
+
+7. Infinite Scrolling (5 new posts per fetch for demonstration purposes)
+<img src='https://i.imgur.com/qhONzSl.gif' title='Infinite Scrolling' width='' alt='Infinite' />
+
+8. Progress HUD
+<img src='https://i.imgur.com/InKyV4D.gif' title='Progress' width='' alt='Progress' />
+
+9. Like/Dislike a post (implemented with a relation in the Posts table with Parse)
+<img src='https://i.imgur.com/6urSkbH.gif' title='Like' width='' alt='Like' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
